@@ -1,9 +1,18 @@
 <div class="container">
   <header>
-    <h4 class="title"> WikiSearch</h4>
-    <p class="sub-title">
-      The free enclycopedia
-    </p>
+    <div class="header-content">
+      <img src="assets/Logo.JPG" alt="">
+      <div class="header-text">
+        <h4 class="title">WikiSearch</h4>
+        <p class="sub-title">
+          The free encyclopedia
+        </p>
+      </div>
+    </div>
   </header>
-  <app-search></app-search>
+  <app-search (submitted)="onSearch($event)"></app-search>
+  <ng-container *ngFor="let article of articles$ | async">
+    <app-article [article]="article"></app-article>
+  </ng-container>
+  
 </div>

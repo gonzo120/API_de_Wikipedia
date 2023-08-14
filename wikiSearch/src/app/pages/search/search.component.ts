@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, tap } from 'rxjs';
+
 
 @Component({
   selector: 'app-search',
@@ -9,14 +10,26 @@ import { tap } from 'rxjs';
 })
 export class SearchComponent implements OnInit {
   inputSearch = new FormControl('');
-  constructor(){
-    this.inputSearch.valueChanges
-    .pipe(
-      tap(res=> console.log('Input ->', res))
-    )
-    .subscribe()
-  }
-  ngOnInit(): void {
+  @Output() submitted = new EventEmitter<string>();
 
+  constructor() {
+    this.onChange();
+  }
+
+  ngOnInit(): void { }
+
+  onChange(): void {
+    this.inputSearch.valueChanges
+      .pipe(
+        map((search: string | null) => search ? search.trim() : ''),
+        debounceTime(350),
+        distinctUntilChanged(),
+        tap((search: string) => {
+          if (search !== '') {
+            this.submitted.emit(search);
+          }
+        })
+      )
+      .subscribe();
   }
 }

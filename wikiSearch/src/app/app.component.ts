@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { SearchService } from './pages/search/services/search.services';
-import { tap } from 'rxjs';
+import { Article, SearchService } from './pages/search/services/search.services';
+import { tap,Observable } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,11 +8,18 @@ import { tap } from 'rxjs';
 })
 export class AppComponent {
   title = 'wikiSearch';
+  articles$ !: Observable<Article[]>;
+
   constructor( private readonly searchSvc: SearchService) {
-    this.searchSvc.search('angular')
+      /*  this.searchSvc.search('angular')
       .pipe(
         tap(res => console.log (res))
       )
-      .subscribe()
+      .subscribe()  */
+  }
+  onSearch(term:string): void{
+    this.articles$ = this.searchSvc.search(term)
+      
+    
   }
 }

@@ -16,3 +16,24 @@ app-search {
       font-size: 1rem;
     }
   }
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-content img {
+    width: 250px; /* Ajusta el tamaño de la imagen según tus preferencias */
+    height: auto;
+    margin-right: 20px;
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.title, .sub-title {
+    margin: 0;
+}

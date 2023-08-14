@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { SearchComponent } from './pages/search/search.component';
 import { SearchModule } from './pages/search/search.module';
 import { HttpClientModule } from "@angular/common/http";
+import { ArticleModule } from './pages/article/article.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { HttpClientModule } from "@angular/common/http";
     BrowserModule,
     SearchModule,
     HttpClientModule,
-
+    ArticleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
